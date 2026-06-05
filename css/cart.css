@@ -484,3 +484,107 @@
     filter: drop-shadow(0 0 10px rgba(45, 212, 191, 0.8));
     transform: scale(1.02);
 }
+
+/* GLOBAL RESPONSIVE RESET */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+/* MOBILE AND RESPONSIVE OVERRIDES FOR VERTICAL PORTRAIT VIEWS */
+@media (max-width: 768px) {
+    /* Prevent overall horizontal body scrolling on mobile */
+    html, body {
+        width: 100%;
+        overflow-x: hidden;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Stack navigation items vertically on small mobile viewports */
+    .header {
+        padding: 0.8rem 1rem !important;
+        position: sticky !important;
+        top: 0 !important;
+        width: 100% !important;
+    }
+
+    .navbar {
+        flex-direction: column !important;
+        gap: 0.75rem !important;
+        text-align: center !important;
+        width: 100% !important;
+    }
+
+    .brand-logo-img {
+        height: 48px !important; /* Scale logo down on mobile to save vertical space */
+        margin-bottom: 0.2rem;
+    }
+
+    .nav-links {
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 0.8rem 1.2rem !important;
+        width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .nav-links li {
+        margin: 0 !important;
+    }
+
+    .nav-links li a {
+        font-size: 0.88rem !important; /* Slightly smaller for fitting on portrait */
+        font-weight: 600 !important;
+    }
+    
+    /* Make sure the shopping cart icon btn aligns nicely in the row */
+    .cart-wrapper {
+        display: inline-block !important;
+    }
+    
+    /* Ensure content margins fit mobile screen width */
+    .content-wrap, 
+    .main-container,
+    .hero-section {
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        overflow-x: hidden;
+    }
+
+    /* Fix story block grid column gap and inner padding on tablet/mobile */
+    .story-block {
+        gap: 1.5rem !important;
+        padding: 1.5rem !important;
+    }
+    
+    /* Fix form containers for Contact and Login to prevent vertical mode overflows */
+    .contact-container, 
+    .login-container {
+        padding: 2rem 1.5rem !important; /* Reduce padding on mobile to give inputs more space */
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Scale down large headings on small portrait mobile screens */
+    .page-title-section h1, 
+    .page-header h1, 
+    .hero-section h1,
+    .contact-header h1 {
+        font-size: 1.85rem !important;
+        line-height: 1.25 !important;
+        letter-spacing: -0.5px !important;
+    }
+
+    .page-title-section p, 
+    .page-header p, 
+    .hero-section p,
+    .contact-header p {
+        font-size: 0.95rem !important;
+        line-height: 1.4 !important;
+    }
+}
