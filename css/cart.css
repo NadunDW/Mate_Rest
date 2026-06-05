@@ -499,38 +499,62 @@
 
 .mobile-menu-toggle {
     display: none;
-    background: none;
-    border: none;
-    padding: 8px;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     cursor: pointer;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 34px;
-    height: 24px;
+    position: relative;
     z-index: 110;
+    transition: background-color 0.2s, border-color 0.2s;
+    padding: 0;
+}
+
+.mobile-menu-toggle:hover {
+    background: #0f766e;
+    border-color: #2dd4bf;
 }
 
 .hamburger-line {
-    display: block;
-    width: 100%;
+    position: absolute;
+    left: 10px; /* center a 22px line inside a 42px button */
+    width: 22px;
     height: 2px;
     background-color: #ffffff;
     border-radius: 2px;
     transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+.hamburger-line:nth-child(1) {
+    top: 14px;
+}
+
+.hamburger-line:nth-child(2) {
+    top: 20px;
+}
+
+.hamburger-line:nth-child(3) {
+    top: 26px;
+}
+
 /* Hamburger Transformation Animations to X */
 .mobile-menu-toggle.active .hamburger-line:nth-child(1) {
-    transform: translateY(8px) rotate(45deg);
+    top: 20px;
+    transform: rotate(45deg);
     background-color: #2dd4bf;
 }
 
 .mobile-menu-toggle.active .hamburger-line:nth-child(2) {
     opacity: 0;
+    transform: scaleX(0);
 }
 
 .mobile-menu-toggle.active .hamburger-line:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg);
+    top: 20px;
+    transform: rotate(-45deg);
     background-color: #2dd4bf;
 }
 
