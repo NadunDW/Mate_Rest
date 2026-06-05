@@ -490,6 +490,50 @@
     box-sizing: border-box;
 }
 
+/* HEADER CONTROLS AND MOBILE NAVIGATION BAR TOGGLE */
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.mobile-menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 34px;
+    height: 24px;
+    z-index: 110;
+}
+
+.hamburger-line {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: #ffffff;
+    border-radius: 2px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hamburger Transformation Animations to X */
+.mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+    background-color: #2dd4bf;
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+    background-color: #2dd4bf;
+}
+
 /* MOBILE AND RESPONSIVE OVERRIDES FOR VERTICAL PORTRAIT VIEWS */
 @media (max-width: 768px) {
     /* Prevent overall horizontal body scrolling on mobile */
@@ -502,48 +546,77 @@
 
     /* Stack navigation items vertically on small mobile viewports */
     .header {
-        padding: 0.8rem 1rem !important;
+        padding: 0.8rem 1.5rem !important;
         position: sticky !important;
         top: 0 !important;
         width: 100% !important;
     }
 
     .navbar {
-        flex-direction: column !important;
-        gap: 0.75rem !important;
-        text-align: center !important;
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: space-between !important;
+        align-items: center !important;
         width: 100% !important;
+        padding: 0 !important;
+        gap: 0 !important;
     }
 
     .brand-logo-img {
         height: 48px !important; /* Scale logo down on mobile to save vertical space */
-        margin-bottom: 0.2rem;
+        margin-bottom: 0 !important;
+    }
+
+    .mobile-menu-toggle {
+        display: flex;
     }
 
     .nav-links {
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: wrap !important;
-        justify-content: center !important;
-        align-items: center !important;
-        gap: 0.8rem 1.2rem !important;
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
         width: 100% !important;
-        padding: 0 !important;
+        background: #111827 !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        justify-content: flex-start !important;
+        padding: 1.5rem !important;
+        gap: 1.25rem !important;
+        transform: translateY(-20px) !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+        z-index: 95 !important;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3) !important;
         margin: 0 !important;
+        list-style: none !important;
+    }
+
+    .nav-links.mobile-open {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
     }
 
     .nav-links li {
+        width: 100% !important;
+        text-align: center !important;
         margin: 0 !important;
     }
 
     .nav-links li a {
-        font-size: 0.88rem !important; /* Slightly smaller for fitting on portrait */
+        display: block !important;
+        width: 100% !important;
+        padding: 0.5rem 0 !important;
+        font-size: 1rem !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.02) !important;
         font-weight: 600 !important;
     }
-    
-    /* Make sure the shopping cart icon btn aligns nicely in the row */
-    .cart-wrapper {
-        display: inline-block !important;
+
+    /* Hide the original cart icon list element inside dropdown links on mobile */
+    .nav-links li:last-child {
+        display: none !important;
     }
     
     /* Ensure content margins fit mobile screen width */

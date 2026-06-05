@@ -216,6 +216,61 @@ function updateCartInterface() {
 
 // Setup Event Listeners on DOM load
 document.addEventListener('DOMContentLoaded', () => {
+    // --- RESPONSIVE MOBILE NAVIGATION TOGGLE (HAMBURGER) ---
+    const navbar = document.querySelector('.navbar');
+    const navLinks = document.querySelector('.nav-links');
+    const cartWrapper = document.querySelector('.cart-wrapper');
+    
+    if (navbar && navLinks) {
+        // Create controls wrapper
+        const headerControls = document.createElement('div');
+        headerControls.className = 'header-controls';
+        
+        // Create hamburger button
+        const menuToggle = document.createElement('button');
+        menuToggle.className = 'mobile-menu-toggle';
+        menuToggle.setAttribute('aria-label', 'Toggle Navigation Menu');
+        menuToggle.innerHTML = `
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        `;
+        
+        // Move cartWrapper inside headerControls
+        if (cartWrapper) {
+            headerControls.appendChild(cartWrapper);
+        }
+        
+        // Append hamburger inside headerControls
+        headerControls.appendChild(menuToggle);
+        
+        // Append headerControls directly inside navbar
+        navbar.appendChild(headerControls);
+        
+        // Toggle menu action
+        menuToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navLinks.classList.toggle('mobile-open');
+            menuToggle.classList.toggle('active');
+        });
+        
+        // Close menu on click outside
+        document.addEventListener('click', (e) => {
+            if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
+                navLinks.classList.remove('mobile-open');
+                menuToggle.classList.remove('active');
+            }
+        });
+        
+        // Close menu on link clicks
+        navLinks.querySelectorAll('li a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('mobile-open');
+                menuToggle.classList.remove('active');
+            });
+        });
+    }
+
     const sidebar = document.getElementById('cartSidebar');
     const overlay = document.getElementById('overlay');
     const cartBtn = document.getElementById('cartBtn');
