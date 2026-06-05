@@ -477,11 +477,12 @@
 
 /* BRAND LOGO HOVER GLOW EFFECT */
 .brand-logo-img {
+    filter: brightness(0) invert(1);
     transition: filter 0.3s ease, transform 0.3s ease;
 }
 
 .brand-logo-img:hover {
-    filter: drop-shadow(0 0 10px rgba(45, 212, 191, 0.8));
+    filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(45, 212, 191, 0.8));
     transform: scale(1.02);
 }
 
