@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home | Mate Rest</title>
+    <link rel="stylesheet" href="css/cart.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, sans-serif;
+            background-image: linear-gradient(rgba(17, 24, 39, 0.82), rgba(17, 24, 39, 0.88)), url('assets/images/BG/Home/Home.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+        }
+        .header {
+            width: 100%;
+            background: #111827; 
+            padding: 0.3rem 2rem;
+            box-sizing: border-box;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .brand-logo-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+        .brand-logo-img {
+            height: 68px;
+            width: auto;
+            object-fit: contain;
+        }
+        .nav-links {
+            display: flex;
+            align-items: center;
+            list-style: none;
+            gap: 1.5rem;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-links li a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+        .nav-links li a:hover, .nav-links li a.active {
+            color: #ffffff;
+        }
+
+
+
+        .hero-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10rem 2rem;
+            text-align: center;
+        }
+        .hero-section h1 {
+            font-size: 3.8rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
+        }
+        .hero-section p {
+            font-size: 1.25rem;
+            color: #9ca3af;
+            max-width: 650px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.6;
+        }
+        .cta-btn {
+            background-color: #0f766e;
+            color: white;
+            padding: 0.9rem 2.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            transition: background-color 0.2s;
+        }
+        .cta-btn:hover {
+            background-color: #14b8a6;
+        }
+        .footer {
+            text-align: center;
+            padding: 2.5rem;
+            color: #6b7280;
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html" class="brand-logo-link">
+                <img src="assets/images/Logo/Logo.png" alt="Mate Rest Logo" class="brand-logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li>
+                    <div class="cart-wrapper">
+                        <a href="#" class="cart-icon-btn" id="cartBtn">
+                            <img src="assets/icons/shopping-bag.png" alt="Cart" style="width:20px;height:20px;filter:brightness(0) invert(1);">
+                        </a>
+                        <span class="cart-badge" id="cartBadge">0</span>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="overlay" id="overlay"></div>
+    <!-- HIGH-QUALITY CART SIDEBAR -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-head">
+            <h2>Your Shopping Cart</h2>
+            <button class="cart-close" id="cartClose">&times;</button>
+        </div>
+        <div class="cart-body" id="cartBody">
+            <div class="cart-empty">
+                <span class="cart-empty-icon">🛒</span>
+                Your cart is completely empty. Start adding some comfort styles to your bed!
+            </div>
+        </div>
+        <div class="cart-foot">
+            <div class="total-row">
+                <span class="total-label">Subtotal Amount:</span>
+                <span class="total-price" id="cartTotal">$0.00</span>
+            </div>
+            <button class="checkout-btn">
+                <span>Secure Checkout</span> &rarr;
+            </button>
+        </div>
+    </div>
+
+    <main class="hero-section">
+        <h1>Welcome to Mate Rest</h1>
+        <p>Engineered for comfort. Crafted for every sleeper. Experience deep ergonomic sleep technology like never before.</p>
+        <a href="products.html" class="cta-btn">View Products</a>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; Mate Rest 2026. All rights reserved.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us | Mate Rest</title>
+    <link rel="stylesheet" href="css/cart.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, sans-serif;
+            background-image: linear-gradient(rgba(17, 24, 39, 0.82), rgba(17, 24, 39, 0.88)), url('assets/images/BG/About/About.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+        }
+        .header {
+            width: 100%;
+            background: #111827; 
+            padding: 0.3rem 2rem;
+            box-sizing: border-box;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .brand-logo-link { display: flex; align-items: center; text-decoration: none; }
+        .brand-logo-img { height: 68px; width: auto; object-fit: contain; }
+        .nav-links { display: flex; align-items: center; list-style: none; gap: 1.5rem; margin: 0; padding: 0; }
+        .nav-links li a { color: #9ca3af; text-decoration: none; font-size: 0.95rem; font-weight: 500; }
+        .nav-links li a:hover, .nav-links li a.active { color: #ffffff; }
+
+
+
+        .content-wrap { max-width: 1000px; margin: 4rem auto 6rem; padding: 0 2rem; }
+        .page-header { text-align: center; margin-bottom: 4rem; }
+        .page-header h1 { font-size: 2.6rem; font-weight: 800; margin-bottom: 0.5rem; letter-spacing: -1px; }
+        .page-header p { color: #9ca3af; font-size: 1.1rem; }
+
+        .story-block { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; background: #1f2937; padding: 3rem; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.05); margin-bottom: 4rem; }
+        @media(max-width: 768px) { .story-block { grid-template-columns: 1fr; padding: 2rem; } }
+        
+        .story-content h2 { font-size: 1.8rem; margin-top: 0; color: #ffffff; }
+        .story-content p { color: #9ca3af; line-height: 1.7; font-size: 1.05rem; }
+        .story-img-frame { border-radius: 14px; overflow: hidden; aspect-ratio: 4/3; }
+        .story-img-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+        .pillars-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 4rem; }
+        @media(max-width: 768px) { .pillars-grid { grid-template-columns: 1fr; } }
+
+        .pillar-card { background: #1f2937; padding: 2.5rem 1.5rem; border-radius: 18px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.05); }
+        .pillar-icon { font-size: 2.5rem; display: block; margin-bottom: 1rem; }
+        .pillar-card h3 { font-size: 1.2rem; margin: 0 0 0.5rem 0; color: #ffffff; }
+        .pillar-card p { color: #9ca3af; font-size: 0.95rem; line-height: 1.5; margin: 0; }
+
+        .team-title { text-align: center; margin-bottom: 2.5rem; font-size: 2rem; font-weight: 800; }
+        .team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        @media(max-width: 768px) { .team-grid { grid-template-columns: 1fr; } }
+
+        .team-card { background: #1f2937; border-radius: 18px; padding: 2.5rem 1.5rem; text-align: center; border: 1px solid rgba(255, 255, 255, 0.05); }
+        .team-avatar { width: 110px; height: 110px; border-radius: 50%; object-fit: cover; margin: 0 auto 1.2rem; border: 3px solid #0f766e; display: block; }
+        .team-card h4 { margin: 0 0 0.25rem 0; font-size: 1.2rem; }
+        .team-role { color: #2dd4bf; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; margin-bottom: 1rem; }
+        .team-bio { color: #9ca3af; font-size: 0.95rem; margin: 0; line-height: 1.5; }
+
+        .footer { text-align: center; padding: 2.5rem; color: #6b7280; font-size: 0.9rem; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html" class="brand-logo-link">
+                <img src="assets/images/Logo/Logo.png" alt="Mate Rest Logo" class="brand-logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li>
+                    <div class="cart-wrapper">
+                        <a href="#" class="cart-icon-btn" id="cartBtn">
+                            <img src="assets/icons/shopping-bag.png" alt="Cart" style="width:20px;height:20px;filter:brightness(0) invert(1);">
+                        </a>
+                        <span class="cart-badge" id="cartBadge">0</span>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="overlay" id="overlay"></div>
+    <!-- HIGH-QUALITY CART SIDEBAR -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-head">
+            <h2>Your Shopping Cart</h2>
+            <button class="cart-close" id="cartClose">&times;</button>
+        </div>
+        <div class="cart-body" id="cartBody">
+            <div class="cart-empty">
+                <span class="cart-empty-icon">🛒</span>
+                Your cart is completely empty. Start adding some comfort styles to your bed!
+            </div>
+        </div>
+        <div class="cart-foot">
+            <div class="total-row">
+                <span class="total-label">Subtotal Amount:</span>
+                <span class="total-price" id="cartTotal">$0.00</span>
+            </div>
+            <button class="checkout-btn">
+                <span>Secure Checkout</span> &rarr;
+            </button>
+        </div>
+    </div>
+
+    <main class="content-wrap">
+        <div class="page-header">
+            <h1>About Mate Rest</h1>
+            <p>Sculpting the ultimate sanctuary for your nightly renewal.</p>
+        </div>
+
+        <section class="story-block">
+            <div class="story-content">
+                <h2>Our Sleep Philosophy</h2>
+                <p>At Mate Rest, we don’t just engineer mattresses—we architect better mornings. We believe that high-quality sleep is the absolute foundation of a healthy, productive, and fulfilled life.</p>
+                <p>Every profile launch combines master-crafted ergonomic contours with premium, highly breathable core layers, giving you a deeply restorative, cloud-like experience all night long.</p>
+            </div>
+            <div class="story-img-frame">
+                <img src="images/about-philosophy.jpg" alt="Philosophy" onerror="this.src='https://images.unsplash.com/photo-1540518614846-7eded433c457?q=80&w=800&auto=format&fit=crop'">
+            </div>
+        </section>
+
+        <section class="pillars-grid">
+            <div class="pillar-card">
+                <span class="pillar-icon">🧬</span>
+                <h3>Ergonomic Architecture</h3>
+                <p>Tailored zones intentionally designed to perfectly realign your spine and eliminate pressure tension.</p>
+            </div>
+            <div class="pillar-card">
+                <span class="pillar-icon">🌬️</span>
+                <h3>Hyper-Breathable Core</h3>
+                <p>Advanced cross-woven cell formats that smoothly dissipate heat for cool, crisp all-night ventilation.</p>
+            </div>
+            <div class="pillar-card">
+                <span class="pillar-icon">🌱</span>
+                <h3>Sustainably Tailored</h3>
+                <p>Woven delicately with hypoallergenic, eco-conscious fabrics that protect both skin textures and the planet.</p>
+            </div>
+        </section>
+
+        <h3 class="team-title">Meet The Team</h3>
+        <section class="team-grid">
+            <div class="team-card">
+                <img class="team-avatar" src="assets/images/people/CEO.png" alt="Michael Carter" onerror="this.src='https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=400&auto=format&fit=crop'">
+                <h4>Michael Carter</h4>
+                <div class="team-role">FOUNDER & CEO</div>
+                <p class="team-bio">With over 15 years of experience in sleep innovation and consumer comfort products, Michael leads the company’s vision of creating premium mattresses that combine advanced support technology with exceptional comfort. His focus on quality and customer satisfaction has helped shape the brand into a trusted name in better sleep.</p>
+            </div>
+            <div class="team-card">
+                <img class="team-avatar" src="assets/images/people/Design.png" alt="Olivia Bennett" onerror="this.src='https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=400&auto=format&fit=crop'">
+                <h4>Olivia Bennett</h4>
+                <div class="team-role">HEAD OF DESIGN</div>
+                <p class="team-bio">Olivia brings a passion for functional design and modern aesthetics to every mattress collection. She oversees product styling, material selection, and comfort-focused design innovations, ensuring each mattress delivers both visual appeal and a superior sleep experience.</p>
+            </div>
+            <div class="team-card">
+                <img class="team-avatar" src="assets/images/people/Manager.png" alt="David Chen" onerror="this.src='https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=400&auto=format&fit=crop'">
+                <h4>David Chen</h4>
+                <div class="team-role">PRODUCT MANAGER</div>
+                <p class="team-bio">David manages the development and quality assurance of every mattress model from concept to production. He works closely with engineering and manufacturing teams to ensure each product meets strict performance, durability, and comfort standards before reaching customers.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; Mate Rest 2026. All rights reserved.</p>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

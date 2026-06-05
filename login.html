@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Mate Rest</title>
+    <link rel="stylesheet" href="css/cart.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, sans-serif;
+            background-image: linear-gradient(rgba(17, 24, 39, 0.82), rgba(17, 24, 39, 0.88)), url('assets/images/BG/Login/Login.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+        }
+        .header {
+            width: 100%;
+            background: #111827; 
+            padding: 0.3rem 2rem;
+            box-sizing: border-box;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .brand-logo-link { display: flex; align-items: center; text-decoration: none; }
+        .brand-logo-img { height: 68px; width: auto; object-fit: contain; }
+        .nav-links { display: flex; align-items: center; list-style: none; gap: 1.5rem; margin: 0; padding: 0; }
+        .nav-links li a { color: #9ca3af; text-decoration: none; font-size: 0.95rem; font-weight: 500; }
+        .nav-links li a:hover, .nav-links li a.active { color: #ffffff; }
+
+
+
+        .login-wrapper { display: flex; justify-content: center; align-items: center; min-height: 78vh; padding: 2rem 1rem; }
+        .login-container { width: 100%; max-width: 440px; background: #1f2937; padding: 3rem 2.5rem; border-radius: 20px; box-shadow: 0 20px 40px rgba(0,0,0,0.25); border: 1px solid rgba(255, 255, 255, 0.05); text-align: center; }
+        .login-header h1 { font-size: 2.3rem; font-weight: 800; margin: 0 0 0.4rem 0; letter-spacing: -0.5px; }
+        .login-header p { color: #9ca3af; margin: 0 0 2.5rem 0; font-size: 0.98rem; }
+        .form-group { margin-bottom: 1.4rem; display: flex; flex-direction: column; text-align: left; }
+        .form-group label { font-size: 0.88rem; font-weight: 600; color: #9ca3af; margin-bottom: 0.5rem; }
+        .form-control { width: 100%; padding: 0.85rem 1rem; font-size: 0.95rem; background-color: #111827; border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 10px; color: #ffffff; box-sizing: border-box; transition: border-color 0.2s; }
+        .form-control:focus { outline: none; border-color: #0f766e; }
+        
+        .form-options { display: flex; justify-content: space-between; align-items: center; margin: 1.5rem 0 2rem; font-size: 0.88rem; }
+        .remember-me { display: flex; align-items: center; gap: 0.5rem; color: #9ca3af; cursor: pointer; }
+        .remember-me input { width: 16px; height: 16px; accent-color: #0f766e; cursor: pointer; }
+        .forgot-link { color: #2dd4bf; text-decoration: none; font-weight: 600; }
+        .forgot-link:hover { text-decoration: underline; }
+
+        .login-btn { width: 100%; background-color: #0f766e; color: #ffffff; border: none; border-radius: 10px; padding: 0.9rem; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background-color 0.2s; }
+        .login-btn:hover { background-color: #14b8a6; }
+        .footer { text-align: center; padding: 2.5rem; color: #6b7280; font-size: 0.9rem; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html" class="brand-logo-link">
+                <img src="assets/images/Logo/Logo.png" alt="Mate Rest Logo" class="brand-logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html" class="active">Login</a></li>
+                <li>
+                    <div class="cart-wrapper">
+                        <a href="#" class="cart-icon-btn" id="cartBtn">
+                            <img src="assets/icons/shopping-bag.png" alt="Cart" style="width:20px;height:20px;filter:brightness(0) invert(1);">
+                        </a>
+                        <span class="cart-badge" id="cartBadge">0</span>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="overlay" id="overlay"></div>
+    <!-- HIGH-QUALITY CART SIDEBAR -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-head">
+            <h2>Your Shopping Cart</h2>
+            <button class="cart-close" id="cartClose">&times;</button>
+        </div>
+        <div class="cart-body" id="cartBody">
+            <div class="cart-empty">
+                <span class="cart-empty-icon">🛒</span>
+                Your cart is completely empty. Start adding some comfort styles to your bed!
+            </div>
+        </div>
+        <div class="cart-foot">
+            <div class="total-row">
+                <span class="total-label">Subtotal Amount:</span>
+                <span class="total-price" id="cartTotal">$0.00</span>
+            </div>
+            <button class="checkout-btn">
+                <span>Secure Checkout</span> &rarr;
+            </button>
+        </div>
+    </div>
+
+    <main class="login-wrapper">
+        <div class="login-container">
+            <div class="login-header">
+                <h1>Welcome Back</h1>
+                <p>Access your Mate Rest account</p>
+            </div>
+
+            <form action="#" method="POST" onsubmit="event.preventDefault();">
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" class="form-control" placeholder="enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="••••••••••••" required>
+                </div>
+
+                <div class="form-options">
+                    <label class="remember-me">
+                        <input type="checkbox" id="remember">
+                        <span>Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-link">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="login-btn">Sign In</button>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; Mate Rest 2026. All rights reserved.</p>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

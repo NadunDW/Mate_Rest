@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Our Mattress Collection | Mate Rest</title>
+    <link rel="stylesheet" href="css/cart.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: system-ui, -apple-system, sans-serif;
+            background-image: linear-gradient(rgba(17, 24, 39, 0.82), rgba(17, 24, 39, 0.88)), url('assets/images/BG/Products/products.jpg');
+            background-attachment: fixed;
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+        }
+        .header {
+            width: 100%;
+            background: #111827; 
+            padding: 0.3rem 2rem;
+            box-sizing: border-box;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .brand-logo-link { display: flex; align-items: center; text-decoration: none; }
+        .brand-logo-img { height: 68px; width: auto; object-fit: contain; }
+        .nav-links { display: flex; align-items: center; list-style: none; gap: 1.5rem; margin: 0; padding: 0; }
+        .nav-links li a { color: #9ca3af; text-decoration: none; font-size: 0.95rem; font-weight: 500; }
+        .nav-links li a:hover, .nav-links li a.active { color: #ffffff; }
+
+
+
+        /* PRODUCT TILES MAIN GRID STYLING */
+        .main-container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem 6rem; }
+        .page-title-section { text-align: center; margin-bottom: 3.5rem; }
+        .page-title-section h1 { font-size: 2.5rem; font-weight: 800; margin: 0 0 0.5rem 0; letter-spacing: -0.5px; }
+        .page-title-section p { color: #9ca3af; font-size: 1rem; margin: 0; }
+
+        .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+        @media (max-width: 1024px) { .products-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { .products-grid { grid-template-columns: 1fr; } }
+
+        .product-card { background-color: #1f293d; border-radius: 16px; padding: 1.25rem; display: flex; flex-direction: column; position: relative; border: 1px solid rgba(255, 255, 255, 0.03); }
+        .image-container { width: 100%; border-radius: 12px; overflow: hidden; position: relative; aspect-ratio: 1.58 / 1; background-color: #2e3748; }
+        .product-image { width: 100%; height: 100%; object-fit: cover; }
+
+        .tag-badge { position: absolute; top: 12px; left: 12px; background-color: #0f766e; color: #2dd4bf; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; padding: 0.25rem 0.6rem; border-radius: 6px; letter-spacing: 0.5px; }
+        .price-badge { position: absolute; bottom: 12px; right: 12px; background-color: rgba(255, 255, 255, 0.9); color: #111827; font-size: 1.3rem; font-weight: 800; padding: 0.2rem 0.75rem; border-radius: 8px; }
+
+        .product-info { margin-top: 1.25rem; display: flex; flex-direction: column; flex-grow: 1; }
+        .product-title { font-size: 1.15rem; font-weight: 700; margin: 0 0 0.5rem 0; color: #ffffff; }
+        .product-description { font-size: 0.88rem; color: #9ca3af; line-height: 1.5; margin: 0 0 1.5rem 0; flex-grow: 1; }
+
+        .card-action-row { display: flex; justify-content: space-between; align-items: center; margin-top: auto; }
+        .teal-price-text { color: #2dd4bf; font-size: 1.2rem; font-weight: 700; }
+        .add-cart-btn { background-color: #374151; color: #ffffff; border: none; padding: 0.55rem 1.1rem; font-size: 0.85rem; font-weight: 600; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+        .add-cart-btn:hover { background-color: #4b5563; }
+
+        .footer { text-align: center; padding: 2.5rem; color: #6b7280; font-size: 0.9rem; border-top: 1px solid rgba(255, 255, 255, 0.05); margin-top: 4rem; }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <a href="index.html" class="brand-logo-link">
+                <img src="assets/images/Logo/Logo.png" alt="Mate Rest Logo" class="brand-logo-img">
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html" class="active">Products</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li>
+                    <div class="cart-wrapper">
+                        <a href="#" class="cart-icon-btn" id="cartBtn">
+                            <img src="assets/icons/shopping-bag.png" alt="Cart" style="width:20px;height:20px;filter:brightness(0) invert(1);">
+                        </a>
+                        <span class="cart-badge" id="cartBadge">0</span>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="overlay" id="overlay"></div>
+    
+    <!-- HIGH-QUALITY CART SIDEBAR -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-head">
+            <h2>Your Shopping Cart</h2>
+            <button class="cart-close" id="cartClose">&times;</button>
+        </div>
+        <div class="cart-body" id="cartBody">
+            <div class="cart-empty">
+                <span class="cart-empty-icon">🛒</span>
+                Your cart is completely empty. Start adding some comfort styles to your bed!
+            </div>
+        </div>
+        <div class="cart-foot">
+            <div class="total-row">
+                <span class="total-label">Subtotal Amount:</span>
+                <span class="total-price" id="cartTotal">$0.00</span>
+            </div>
+            <button class="checkout-btn">
+                <span>Secure Checkout</span> &rarr;
+            </button>
+        </div>
+    </div>
+
+    <main class="main-container">
+        <div class="page-title-section">
+            <h1>Explore Our Mattress Collection</h1>
+            <p>Engineered for comfort. Crafted for every sleeper.</p>
+        </div>
+
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card">
+                <div class="image-container">
+                    <span class="tag-badge">Essential Comfort</span>
+                    <img src="assets/images/Beds/Single Mattress.png" class="product-image" alt="Single Mattress" onerror="this.src='https://images.unsplash.com/photo-1631049307264-da0ec9d70304?q=80&w=600&auto=format&fit=crop'">
+                    
+                </div>
+                <div class="product-info">
+                    <h2 class="product-title">Single Mattress</h2>
+                    <p class="product-description">Perfect for solo sleepers, studio lofts, and child rooms.</p>
+                    <div class="color-selection-row">
+                        <span class="color-label">Select Color:</span>
+                        <div class="color-swatches">
+                            <span class="color-swatch swatch-white" data-color="Classic Alabaster" title="Classic Alabaster" onclick="selectSwatch(this)"></span>
+                            <span class="color-swatch swatch-grey" data-color="Slate Mist" title="Slate Mist" onclick="selectSwatch(this)"></span>
+                            <span class="color-swatch swatch-cream" data-color="Ivory Cashmere" title="Ivory Cashmere" onclick="selectSwatch(this)"></span>
+                            <span class="color-swatch swatch-charcoal" data-color="Charcoal Obsidian" title="Charcoal Obsidian" onclick="selectSwatch(this)"></span>
+                        </div>
+                    </div>
+                    <div class="card-action-row">
+                        <span class="teal-price-text">$99.00</span>
+                        <button class="add-cart-btn" onclick="handleAddToCart('Single Mattress', 99.00, this)">Add To Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="image-container">
+                    <span class="tag-badge">Extra Length</span>
+                    <img src="assets/images/Beds/Twin XL Mattress.png" class="product-image" alt="Twin XL Mattress" onerror="this.src='https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=600&auto=format&fit=crop'">
+                    
+                </div>
+                <div class="product-info">
+                    <h2 class="product-title">Twin XL Mattress</h2>
+                    <p class="product-description">Extended frame length tailored beautifully for taller sleepers.</p>
+                    <div class="color-selection-row">
+                        <span class="color-label">Select Color:</span>
+                        <div class="color-swatches">
+                            <span class="color-swatch swatch-white" data-color="Classic Alabaster" title="Classic Alabaster" onclick="selectSwatch(this)"></span>
+                            <span class="color-swatch swatch-grey" data-color="Slate Mist" title="Slate Mist" onclick="selectSwatch(this)"></span>
+                            <span class="color-swatch swatch-cream" data-color="Ivory Cashmere" title="Ivory Cashmere" onclick="selectSwatch(this)"></span>
+                            <span class="color-swatch swatch-charcoal" data-color="Charcoal Obsidian" title="Charcoal Obsidian" onclick="selectSwatch(this)"></span>
+                        </div>
+                    </div>
+                    <div class="card-action-row">
+                        <span class="teal-price-text">$149.00</span>
+                        <button class="add-cart-btn" onclick="handleAddToCart('Twin XL Mattress', 149.00, this)">Add To Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="image-container">
+                    <span class="tag-badge">Spacious Living</span>
+                    <img src="assets/images/Beds/Double Mattress.png" class="product-image" alt="Double Mattress" onerror="this.src='https://images.unsplash.com/photo-1540518614846-7eded433c457?q=80&w=600&auto=format&fit=crop'">
+                   
+                </div>
+                <div class="product-info">
+                    <h2 class="product-title">Double Mattress</h2>
+                    <p class="product-description">Ample room to stretch for individuals or smaller guest rooms.</p>
+                    <div class="color-selection-row">
+                        <span class="color-label">Select Color:</span>
+                        <div class="color-swatches">
+                            <span class="color-swatch swatch-white" data-color="Classic Alabaster" title="Classic Alabaster" onclick="selectSwatch(this)"></span>
+                            <span class="color-swatch swatch-grey" data-color="Slate Mist" title="Slate Mist" onclick="selectSwatch(this)"></span>
+                            <span class="color-swatch swatch-cream" data-color="Ivory Cashmere" title="Ivory Cashmere" onclick="selectSwatch(this)"></span>
+                            <span class="color-swatch swatch-charcoal" data-color="Charcoal Obsidian" title="Charcoal Obsidian" onclick="selectSwatch(this)"></span>
+                        </div>
+                    </div>
+                    <div class="card-action-row">
+                        <span class="teal-price-text">$268.00</span>
+                        <button class="add-cart-btn" onclick="handleAddToCart('Double Mattress', 268.00, this)">Add To Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <div class="image-container">
+                    <span class="tag-badge">★ Best Seller</span>
+                    <img src="assets/images/Beds/Queen Mattress.png" class="product-image" alt="Queen Mattress" onerror="this.src='https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?q=80&w=600&auto=format&fit=crop'">
+                    
+                </div>
+                <div class="product-info">
+                    <h2 class="product-title">Queen Mattress</h2>
+                    <p class="product-description">Our flagship luxury blueprint for couples and master bedrooms.</p>
+                    <div class="color-selection-row">
+                        <span class="color-label">Select Color:</span>
+                        <div class="color-swatches">
+                            <span class="color-swatch swatch-white" data-color="Classic Alabaster" title="Classic Alabaster" onclick="selectSwatch(this)"></span>
+                            <span class="color-swatch swatch-grey" data-color="Slate Mist" title="Slate Mist" onclick="selectSwatch(this)"></span>
+                            <span class="color-swatch swatch-cream" data-color="Ivory Cashmere" title="Ivory Cashmere" onclick="selectSwatch(this)"></span>
+                            <span class="color-swatch swatch-charcoal" data-color="Charcoal Obsidian" title="Charcoal Obsidian" onclick="selectSwatch(this)"></span>
+                        </div>
+                    </div>
+                    <div class="card-action-row">
+                        <span class="teal-price-text">$389.00</span>
+                        <button class="add-cart-btn" onclick="handleAddToCart('Queen Mattress', 389.00, this)">Add To Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card">
+                <div class="image-container">
+                    <span class="tag-badge">👑 Master Suite</span>
+                    <img src="assets/images/Beds/King Mattress.png" class="product-image" alt="King Mattress" onerror="this.src='https://images.unsplash.com/photo-1616594039964-ae9021a400a0?q=80&w=600&auto=format&fit=crop'">
+                    
+                </div>
+                <div class="product-info">
+                    <h2 class="product-title">King Mattress</h2>
+                    <p class="product-description">Maximum personal space meets premium layer design overlays.</p>
+                    <div class="color-selection-row">
+                        <span class="color-label">Select Color:</span>
+                        <div class="color-swatches">
+                            <span class="color-swatch swatch-white" data-color="Classic Alabaster" title="Classic Alabaster" onclick="selectSwatch(this)"></span>
+                            <span class="color-swatch swatch-grey" data-color="Slate Mist" title="Slate Mist" onclick="selectSwatch(this)"></span>
+                            <span class="color-swatch swatch-cream" data-color="Ivory Cashmere" title="Ivory Cashmere" onclick="selectSwatch(this)"></span>
+                            <span class="color-swatch swatch-charcoal" data-color="Charcoal Obsidian" title="Charcoal Obsidian" onclick="selectSwatch(this)"></span>
+                        </div>
+                    </div>
+                    <div class="card-action-row">
+                        <span class="teal-price-text">$449.00</span>
+                        <button class="add-cart-btn" onclick="handleAddToCart('King Mattress', 449.00, this)">Add To Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card">
+                <div class="image-container">
+                    <span class="tag-badge">Grand Sanctuary</span>
+                    <img src="assets/images/Beds/Super King Mattress.png" class="product-image" alt="Super King Mattress" onerror="this.src='https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?q=80&w=600&auto=format&fit=crop'">
+                </div>
+                <div class="product-info">
+                    <h2 class="product-title">Super King Mattress</h2>
+                    <p class="product-description">Ultimate luxury scale for vast spaces and shared family mornings.</p>
+                    <div class="color-selection-row">
+                        <span class="color-label">Select Color:</span>
+                        <div class="color-swatches">
+                            <span class="color-swatch swatch-white" data-color="Classic Alabaster" title="Classic Alabaster" onclick="selectSwatch(this)"></span>
+                            <span class="color-swatch swatch-grey" data-color="Slate Mist" title="Slate Mist" onclick="selectSwatch(this)"></span>
+                            <span class="color-swatch swatch-cream" data-color="Ivory Cashmere" title="Ivory Cashmere" onclick="selectSwatch(this)"></span>
+                            <span class="color-swatch swatch-charcoal" data-color="Charcoal Obsidian" title="Charcoal Obsidian" onclick="selectSwatch(this)"></span>
+                        </div>
+                    </div>
+                    <div class="card-action-row">
+                        <span class="teal-price-text">$599.00</span>
+                        <button class="add-cart-btn" onclick="handleAddToCart('Super King Mattress', 599.00, this)">Add To Cart</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 7 -->
+            <div class="product-card">
+                <div class="image-container">
+                    <span class="tag-badge">California Luxury</span>
+                    <img src="assets/images/Beds/California King Mattress.png" class="product-image" alt="California King Mattress" onerror="this.src='https://images.unsplash.com/photo-1544816155-12df9643f363?q=80&w=600&auto=format&fit=crop'">
+                </div>
+                <div class="product-info">
+                    <h2 class="product-title">California King Mattress</h2>
+                    <p class="product-description">Optimized profile thickness layout constructed for multi-use daybeds.</p>
+                    <div class="color-selection-row">
+                        <span class="color-label">Select Color:</span>
+                        <div class="color-swatches">
+                            <span class="color-swatch swatch-white" data-color="Classic Alabaster" title="Classic Alabaster" onclick="selectSwatch(this)"></span>
+                            <span class="color-swatch swatch-grey" data-color="Slate Mist" title="Slate Mist" onclick="selectSwatch(this)"></span>
+                            <span class="color-swatch swatch-cream" data-color="Ivory Cashmere" title="Ivory Cashmere" onclick="selectSwatch(this)"></span>
+                            <span class="color-swatch swatch-charcoal" data-color="Charcoal Obsidian" title="Charcoal Obsidian" onclick="selectSwatch(this)"></span>
+                        </div>
+                    </div>
+                    <div class="card-action-row">
+                        <span class="teal-price-text">$699.00</span>
+                        <button class="add-cart-btn" onclick="handleAddToCart('California King Mattress', 699.00, this)">Add To Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; Mate Rest 2026. All rights reserved.</p>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">
+        <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+    </button>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
